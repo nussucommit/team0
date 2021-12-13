@@ -1,0 +1,15 @@
+Search bar
+<form action='/results' method='post'>
+	<label for='user_id'>Author:</label>
+	<input id='user_id' type='text' name='user_id'>
+	<label for='content'>Content:</label>
+	<input id='content' type='text' name='user_id'>
+</br>
+	<input type='submit' value='Search'>
+</form>
+</br>
+Results:
+</br>
+{% for item in results %}
+	Title:{{ item.title }} Created:{{ item.datetime }} Likes:{{ item.likes }}
+{% endfor %}

@@ -6,7 +6,7 @@ class User(models.Model):
 	password = models.CharField(max_length=64)
 
 	def __str__(self):
-		return self.user
+		return self.id
 
 '''
 #Remove inheritence and opt for flatter RDB design
