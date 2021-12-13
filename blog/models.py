@@ -2,26 +2,26 @@ from django.db import models
 
 # Create your models here.
 class User(models.Model):
-	UserId = models.CharField(primary_key=True, max_length=64)
-	Password = models.CharField(max_length=64)
+	user = models.CharField(primary_key=True, max_length=64)
+	password = models.CharField(max_length=64)
 
 	def __str__(self):
-		return self.UserId
+		return self.user
 
 class Submission(models.Model):
-	Content = models.TextField()
-	DateTime = models.DateTimeField(auto_now=True)
-	Likes = models.IntegerField()
+	content = models.TextField()
+	datetime = models.DateTimeField(auto_now=True)
+	likes = models.IntegerField()
 
 class Post(Submission):
 	## Use automatic PK for PostId
-	UserId = models.ForeignKey(User, on_delete=models.CASCADE)
-	Title = models.CharField(max_length=128)
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	title = models.CharField(max_length=128)
 
 	def __str__(self):
-		return self.Title
+		return self.title
 
 class Comment(Submission):
 	## Use automatic PK for CommentId
-	PostId = models.ForeignKey(Post, on_delete=models.CASCADE)
-	UserId = models.ForeignKey(User, on_delete=models.CASCADE)
+	post = models.ForeignKey(Post, on_delete=models.CASCADE)
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
