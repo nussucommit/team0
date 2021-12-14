@@ -1,0 +1,11 @@
+Sign Up
+<form action='/sign-up' method='post'>
+	{% csrf_token %}
+	<label for='id'>Username</label>
+	<input id='id' type='text' name='id'>
+	<label for='password'>Password</label>
+	<input id='password' type='password' name='password'>
+</br>
+</br>
+	<input type='submit' value='Register'>
+</form>

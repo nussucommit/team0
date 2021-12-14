@@ -7,6 +7,13 @@ from .forms import RegisterForm
 def home(request):
 	return render(request, 'home.html', {})
 
+def register(request):
+	if request.method == 'POST':
+		form = RegisterForm(request.POST or None)
+		if form.is_valid():
+			form.save()
+	return render(request, 'sign-up.html', {})
+
 def results(request):
 	filters = {}
 
@@ -21,8 +28,8 @@ def results(request):
 		post_results = Post.objects.filter(**filters)
 		if o == '1':
 			post_results = post_results.order_by('-datetime')
-		return render(request, 'results.html', {'results':post_results})
 
 	if request.method == 'GET':
-		post_results = Post.objects.filter(**filters).order_by('datetime')
-		return render(request, 'results.html', {'results':post_results})
+		post_results = Post.objects.order_by('-datetime')
+
+	return render(request, 'results.html', {'results':post_results})
