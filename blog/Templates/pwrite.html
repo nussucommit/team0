@@ -1,7 +1,7 @@
 New Post
 <form action='/pwrite' method='post'>
 	{% csrf_token %}
-	<input id='user' type='hidden' name='user' value='test'>
+	<input id='user' type='hidden' name='user' value={{ self }}>
 	<label for='title'>Title</label>
 	<input id='title' type='text' name='title'>
 </br>
