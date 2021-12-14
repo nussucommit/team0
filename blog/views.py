@@ -19,11 +19,11 @@ def results(request):
 	filters = {}
 
 	if request.method == 'POST':
-		u = request.POST['user_id']
+		u = request.POST['username']
 		c = request.POST['content']
 		o = request.POST['order']
 		if u:
-			filters['user_id'] = u
+			filters['username'] = u
 		if c:
 			filters['content'] = c
 		post_results = Post.objects.filter(**filters)
@@ -37,9 +37,10 @@ def results(request):
 
 def pwrite(request):
 	form = WritePostForm(request.POST or None)
+	self_user = request.user
 	if request.method == 'POST':
 		if form.is_valid():
 			form.save()
 			return redirect('home')
 
-	return render(request, 'pwrite.html', {'form':form})
+	return render(request, 'pwrite.html', {'form':form, 'self': self_user})

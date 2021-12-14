@@ -1,11 +1,11 @@
 from django import forms
-from .models import Post, User, Comment
+from .models import Post, User
 
 
 class RegisterForm(forms.ModelForm):
 	class Meta:
 		model = User
-		fields = ['id', 'password']
+		fields = ['username', 'password']
 	#user_id = forms.CharField(label='Username', min_length=1, max_length=64)
 	#password = forms.CharField(label='Password', max_length=64, widget=PasswordInput)
 
