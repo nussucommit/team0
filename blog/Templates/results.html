@@ -6,9 +6,10 @@ Search bar
 	<label for='content'>Content:</label>
 	<input id='content' type='text' name='content'>
 	<select name='order'>
-		<option value='-'>Newest First</option>
-		<option value='+'>Oldest First</option>
+		<option value='1'>Newest First</option>
+		<option value='0'>Oldest First</option>
 	</select>
+</br>
 </br>
 	<input type='submit' value='Search'>
 </form>
@@ -16,5 +17,5 @@ Search bar
 Results:
 </br>
 {% for item in results %}
-	Title:{{ item.title }} Created:{{ item.datetime }} Likes:{{ item.likes }}
+	Title:{{ item.title }} Created:{{ item.datetime }} Likes:{{ item.likes }} </br>
 {% endfor %}

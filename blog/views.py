@@ -9,22 +9,21 @@ def home(request):
 
 def results(request):
 	filters = {}
-	u = request.GET.get('user_id')
-	c = request.GET.get('content')
-	o = request.GET.get('order')
 
 	if request.method == 'POST':
-		form = SearchForm(request.POST or None)
-		if form.is_valid():
-			u = user
-			c = content
-		post_results = Post.objects.filter(**filters).order_by('datetime')
+		#form = SearchForm(request.POST or None)
+		u = request.POST['user_id']
+		c = request.POST['content']
+		o = request.POST['order']
+		if u:
+			filters['user_id'] = u
+		if c:
+			filters['content'] = c
+		post_results = Post.objects.filter(**filters)
+		if o == '1':
+			post_results = post_results.order_by('-datetime')
 		return render(request, 'results.html', {'results':post_results})
 
 	if request.method == 'GET':
-		if u:
-			filters['u'] = u
-		if c:
-			filters['c'] = c
 		post_results = Post.objects.filter(**filters).order_by('datetime')
 		return render(request, 'results.html', {'results':post_results})
