@@ -1,9 +1,14 @@
 Search bar
 <form action='/results' method='post'>
+	{% csrf_token %}
 	<label for='user_id'>Author:</label>
 	<input id='user_id' type='text' name='user_id'>
 	<label for='content'>Content:</label>
-	<input id='content' type='text' name='user_id'>
+	<input id='content' type='text' name='content'>
+	<select name='order'>
+		<option value='-'>Newest First</option>
+		<option value='+'>Oldest First</option>
+	</select>
 </br>
 	<input type='submit' value='Search'>
 </form>
