@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Post, Comment
 from django.db.models import Q
-from .forms import RegisterForm
+from .forms import RegisterForm, WritePostForm
 
 # Create your views here.
 def home(request):
@@ -12,6 +12,7 @@ def register(request):
 		form = RegisterForm(request.POST or None)
 		if form.is_valid():
 			form.save()
+			return redirect('home')
 	return render(request, 'sign-up.html', {})
 
 def results(request):
@@ -33,3 +34,12 @@ def results(request):
 		post_results = Post.objects.order_by('-datetime')
 
 	return render(request, 'results.html', {'results':post_results})
+
+def pwrite(request):
+	form = WritePostForm(request.POST or None)
+	if request.method == 'POST':
+		if form.is_valid():
+			form.save()
+			return redirect('home')
+
+	return render(request, 'pwrite.html', {'form':form})

@@ -1,0 +1,17 @@
+New Post
+<form action='/pwrite' method='post'>
+	{% csrf_token %}
+	<input id='user' type='hidden' name='user' value='test'>
+	<label for='title'>Title</label>
+	<input id='title' type='text' name='title'>
+</br>
+</br>
+	<input id='content' type='text' name='content'>
+	<input id='likes' type='hidden' name='likes' value=0>
+</br>
+</br>
+	<input type='submit' value='Post'>
+</form>
+
+{{ form.errors }}
+{{ form.non_field_errors }}

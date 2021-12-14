@@ -9,6 +9,10 @@ class RegisterForm(forms.ModelForm):
 	#user_id = forms.CharField(label='Username', min_length=1, max_length=64)
 	#password = forms.CharField(label='Password', max_length=64, widget=PasswordInput)
 
+class WritePostForm(forms.ModelForm):
+	class Meta:
+		model = Post
+		fields = ['user', 'title', 'content','likes']
 '''
 class SignInForm(forms.Form):
 	user_id = forms.CharField(label='Username', max_length=64)
