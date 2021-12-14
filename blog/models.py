@@ -1,7 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 
 # Create your models here.
-class User(models.Model):
+class User(AbstractUser):
 	id = models.CharField(primary_key=True, max_length=64)
 	password = models.CharField(max_length=64)
 
@@ -20,7 +22,7 @@ class Submission(models.Model):
 class Post(models.Model):
 	#post = models.IntegerField(primary_key=True)
 	#submission = models.ForeignKey(Submission, on_delete=models.CASCADE)
-	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 	title = models.CharField(max_length=128)
 	content = models.TextField()
 	datetime = models.DateTimeField(auto_now=True)
@@ -33,7 +35,7 @@ class Comment(models.Model):
 	#comment = models.IntegerField(primary_key=True)
 	#submission = models.ForeignKey(Submission, on_delete=models.CASCADE)
 	post = models.ForeignKey(Post, on_delete=models.CASCADE)
-	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 	content = models.TextField()
 	datetime = models.DateTimeField(auto_now=True)
 	likes = models.IntegerField(default=0)
