@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Post, Comment
 from django.db.models import Q
-from .forms import SearchForm
+from .forms import RegisterForm
 
 # Create your views here.
 def home(request):
@@ -11,7 +11,6 @@ def results(request):
 	filters = {}
 
 	if request.method == 'POST':
-		#form = SearchForm(request.POST or None)
 		u = request.POST['user_id']
 		c = request.POST['content']
 		o = request.POST['order']
