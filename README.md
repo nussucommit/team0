@@ -2,6 +2,9 @@
 
 ## Notes for reference
 
+## ERD / DB Schema
+Available on [LucidChart](https://lucid.app/lucidchart/1e724cd3-96a3-4ccb-8882-86f0eb65a756/edit?viewport_loc=-190%2C116%2C2560%2C1168%2C0_0&invitationId=inv_dbb6ec66-c1e8-4a25-a315-0d4320e5f49c)
+
 ## Authentication Feature :
 ### Sign up
 - `POST` to `User` table via `/sign-up?u=userid&p=password`
