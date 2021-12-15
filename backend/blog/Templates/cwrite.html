@@ -1,0 +1,14 @@
+New Comment
+<form method='post'>
+	{% csrf_token %}
+	<input id='post' type='hidden' name='post' value={{ view.id }}>
+	<input id='user' type='hidden' name='user' value={{ request.user }}>
+	<input id='content' type='text' name='content'>
+	<input id='likes' type='hidden' name='likes' value=0>
+</br>
+</br>
+	<input type='submit' value='Post'>
+</form>
+
+{{ form.errors }}
+{{ form.non_field_errors }}

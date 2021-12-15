@@ -1,0 +1,16 @@
+Title: {{ post.title }}
+</br>
+Created: {{ post.datetime }} by {{ post.user }}
+</br>
+Likes: {{ post.likes }}
+</br>
+Content: </br> {{ post.content }}
+</br>
+Comment Section:
+</br>
+<a href='{% url "create_comment" post.id %}'>Add Comment</a>
+<!--<button onclick="window.location.href='../cwrite/{{ post.id }}'"> Add Comment </button>-->
+</br>
+{% for item in comments %}
+	{{ item.user }} says {{ item.content }} at {{ item.datetime }} </br> Likes:{{ item.likes }} </br>
+{% endfor %}

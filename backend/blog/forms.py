@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, User
+from .models import Post, User, Comment
 
 
 class RegisterForm(forms.ModelForm):
@@ -12,7 +12,12 @@ class RegisterForm(forms.ModelForm):
 class WritePostForm(forms.ModelForm):
 	class Meta:
 		model = Post
-		fields = ['user', 'title', 'content','likes']
+		fields = ['user', 'title', 'content', 'likes']
+
+class WriteCommentForm(forms.ModelForm):
+	class Meta:
+		model = Comment
+		fields = ['user', 'post', 'content', 'likes']
 '''
 class SignInForm(forms.Form):
 	user_id = forms.CharField(label='Username', max_length=64)

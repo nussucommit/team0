@@ -1,8 +1,8 @@
 Search bar
 <form action='/results' method='post'>
 	{% csrf_token %}
-	<label for='user_id'>Author:</label>
-	<input id='user_id' type='text' name='user_id'>
+	<label for='username'>Author:</label>
+	<input id='username' type='text' name='username'>
 	<label for='content'>Content:</label>
 	<input id='content' type='text' name='content'>
 	<select name='order'>
@@ -17,5 +17,5 @@ Search bar
 Results:
 </br>
 {% for item in results %}
-	Title:{{ item.title }} Created:{{ item.datetime }} Likes:{{ item.likes }} </br>
+	<a href= 'pread/{{ item.id }}'>Title:{{ item.title }}</a> Created:{{ item.datetime }} Likes:{{ item.likes }} </br>
 {% endfor %}
