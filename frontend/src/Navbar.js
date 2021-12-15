@@ -1,10 +1,23 @@
 const Navbar = () => {
+
+    const registerPage = () => {
+        console.log('redirecting to register page');
+    }
+
+    const loginPage = () => {
+        console.log('redirecting to login page');
+    }
+    
     return (
         <nav className="navbar">
-            <h1>Blog</h1>
+            <h1>Team0Blog</h1>
             <div className="links">
-                <a href="/">Home</a>
-                <a href="/create">New Post</a>
+                <button block size="lg" type="submit" onClick={() => registerPage()}>
+                Register
+                </button>
+                <button block size="lg" type="submit" onClick={() => loginPage()}>
+                Login
+                </button>
 
             </div>
         </nav>
