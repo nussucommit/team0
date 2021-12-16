@@ -2,50 +2,42 @@ from .serializers import PostSerializer, UserSerializer, CommentSerializer
 from rest_framework import generics
 from .models import Post, User, Comment
 
-class MultipleFieldLookupMixin:
-    """
-    Apply this mixin to any view or viewset to get multiple field filtering
-    based on a `lookup_fields` attribute, instead of the default single field filtering.
-    """
-    def get_object(self):
-        queryset = self.get_queryset()             # Get the base queryset
-        queryset = self.filter_queryset(queryset)  # Apply any filter backends
-        filter = {}
-        for field in self.lookup_fields:
-            if self.kwargs[field]: # Ignore empty fields.
-                filter[field] = self.kwargs[field]
-        obj = get_object_or_404(queryset, **filter)  # Lookup the object
-        self.check_object_permissions(self.request, obj)
-        return obj
 
-class results(MultipleFieldLookupMixin, generics.ListAPIView):
-	queryset = Post.objects.all()
+
+class results(generics.ListAPIView):
 	serializer_class = PostSerializer
-	lookup_fields = ['username', 'content']
+
+	def get_queryset(self, *args, **kwargs):
+		queryset = Post.objects.all()
+		if self.request.query_params.get('username'):
+			#note: icontains does not work for FK or other fields that have choices
+			#if required, can create
+			queryset = queryset.filter(user=self.request.query_params.get('username'))
+		if self.request.query_params.get('content'):
+			queryset = queryset.filter(content__icontains=self.request.query_params.get('content'))
+		if self.request.query_params.get('order') == '1':
+			queryset = queryset.order_by('-datetime')
+		return queryset
+
+
 
 class post(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Post.objects.all()
 	serializer_class = PostSerializer
 
-	def dispatch(self, request, *args, **kwargs):
-		self.id = kwargs.get('id', 'default')
-		return super(post, self).dispatch(request, *args, **kwargs)
-
 class postcomments(generics.ListAPIView):
 	serializer_class = CommentSerializer
-	lookup_field = 'post'
 
+	#use custom queryset instead of custom lookup_field to maintain same serializer with commentView
 	def get_queryset(self, *args, **kwargs):
 		return Comment.objects.filter(post=self.kwargs['post'])
 
 class comment(generics.RetrieveUpdateDestroyAPIView):
 	serializer_class = CommentSerializer
-
-	def dispatch(self, request, *args, **kwargs):
-		self.id = kwargs.get('id', 'default')
-		return super(comment, self).dispatch(request, *args, **kwargs)
+	queryset = Comment.objects.all()
 
 
+#Depreciated code:
 '''
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect, Http404
 from rest_framework.parsers import JSONParser
@@ -56,9 +48,7 @@ from .models import Post, Comment
 from django.views.generic import ListView, DetailView, CreateView
 from .forms import RegisterForm, WritePostForm, WriteCommentForm
 from django.urls import reverse
-'''
 
-'''
 def home(request):
 	return render(request, 'home.html', {})
 
@@ -127,4 +117,19 @@ class cwrite(CreateView):
 
 	def get_success_url(self):
 		return reverse("post_details", kwargs={'id':str(self.object.post.id)})
+
+class MultipleFieldLookupMixin:
+    #Apply this mixin to any view or viewset to get multiple field filtering
+    #based on a `lookup_fields` attribute, instead of the default single field filtering.
+
+    def get_object(self):
+        queryset = self.get_queryset()             # Get the base queryset
+        queryset = self.filter_queryset(queryset)  # Apply any filter backends
+        filter = {}
+        for field in self.lookup_fields:
+            if self.kwargs[field]: # Ignore empty fields.
+                filter[field] = self.kwargs[field]
+        obj = get_object_or_404(queryset, **filter)  # Lookup the object
+        self.check_object_permissions(self.request, obj)
+        return obj
 '''
