@@ -1,10 +1,50 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from .serializers import PostSerializer, UserSerializer, CommentSerializer
+from rest_framework import generics
+from .models import Post, User, Comment
+
+class MultipleFieldLookupMixin:
+    """
+    Apply this mixin to any view or viewset to get multiple field filtering
+    based on a `lookup_fields` attribute, instead of the default single field filtering.
+    """
+    def get_object(self):
+        queryset = self.get_queryset()             # Get the base queryset
+        queryset = self.filter_queryset(queryset)  # Apply any filter backends
+        filter = {}
+        for field in self.lookup_fields:
+            if self.kwargs[field]: # Ignore empty fields.
+                filter[field] = self.kwargs[field]
+        obj = get_object_or_404(queryset, **filter)  # Lookup the object
+        self.check_object_permissions(self.request, obj)
+        return obj
+
+class results(MultipleFieldLookupMixin, generics.ListAPIView):
+	queryset = Post.objects.all()
+	serializer_class = PostSerializer
+	lookup_fields = ['username', 'content']
+
+class post(generics.RetrieveUpdateDestroyAPIView):
+	queryset = Post.objects.all()
+	serializer_class = PostSerializer
+
+class comment(generics.RetrieveUpdateDestroyAPIView):
+	queryset = Comment.objects.all()
+	serializer_class = CommentSerializer
+
+
+'''
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect, Http404
+from rest_framework.parsers import JSONParser
+from django.http import HttpResponse, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .serializers import PostSerializer
 from .models import Post, Comment
 from django.views.generic import ListView, DetailView, CreateView
 from .forms import RegisterForm, WritePostForm, WriteCommentForm
 from django.urls import reverse
+'''
 
-# Create your views here.
+'''
 def home(request):
 	return render(request, 'home.html', {})
 
@@ -50,7 +90,7 @@ def pwrite(request):
 		return redirect('home')
 
 	return render(request, 'pwrite.html', {'form':form, 'self':self_user})
-'''
+
 def cwrite(request, id):
 	post = get_object_or_404(Post, pk=id)
 	form = WriteCommentForm(request.POST or None)
@@ -61,7 +101,7 @@ def cwrite(request, id):
 		return redirect('post_details')
 	if request.method == 'GET':
 		return render(request, 'cwrite.html', {'post':post})
-'''
+
 class cwrite(CreateView):
 	model = Comment
 	form_class = WriteCommentForm
@@ -73,3 +113,4 @@ class cwrite(CreateView):
 
 	def get_success_url(self):
 		return reverse("post_details", kwargs={'id':str(self.object.post.id)})
+'''
