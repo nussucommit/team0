@@ -11,36 +11,44 @@ Responses are formatted as JSON objects.
 - Returns a list of ordered posts that match the query parameters
 - Returns all posts by default and a blank JSON object if no posts meet the query
 - Supported request methods:
+
 | METHOD | ACTION                | PARAMETERS               |
 |--------|-----------------------|--------------------------|
 | GET    | Return search results | username, content, order |
+
 - `username` is strict and requires exact data
 - `content` returns all posts which contain the query string
 - List is ordered chronically showing old posts first by default, pass `order=1` to reverse the order
 
 ### `post/<integer:post_id>`
 - CRUD functionalities for a singular post
+
 | METHOD | ACTION                   | PARAMETERS                      |
 |--------|--------------------------|---------------------------------|
 | GET    | Returns a single post    | id                              |
 | POST   | Creates a new post       | id, user, title, content        |
 | PUT    | Edits an existing post   | id, user, title, content, likes |
 | DELETE | Deletes an existing post | id                              |
+
 - `id` is passed via the URL
 
 ### `post/comments/<integer:post_id>`
 - Returns all corresponding comments under a singular post
+
 | METHOD | ACTION              | PARAMETERS |
 |--------|---------------------|------------|
 | GET    | Return all comments | post       |
+
 - `post` is passed via the URL
 
-### `comment/<integer:comment_id>``
+### `comment/<integer:comment_id>`
 - CRUD functionalities for a singular comment
+
 | METHOD | ACTION                      | PARAMETERS                     |
 |--------|-----------------------------|--------------------------------|
 | GET    | Returns a single comment    | id                             |
 | POST   | Creates a new comment       | id, user, post, content        |
 | PUT    | Edits an existing comment   | id, user, post, content, likes |
 | DELETE | Deletes an existing comment | id                             |
+
 - `id` is passed via the URL
