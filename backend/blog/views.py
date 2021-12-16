@@ -2,8 +2,6 @@ from .serializers import PostSerializer, UserSerializer, CommentSerializer
 from rest_framework import generics
 from .models import Post, User, Comment
 
-
-
 class results(generics.ListAPIView):
 	serializer_class = PostSerializer
 
@@ -11,15 +9,13 @@ class results(generics.ListAPIView):
 		queryset = Post.objects.all()
 		if self.request.query_params.get('username'):
 			#note: icontains does not work for FK or other fields that have choices
-			#if required, can create
+			#if required, can create temporary deep copy to query against
 			queryset = queryset.filter(user=self.request.query_params.get('username'))
 		if self.request.query_params.get('content'):
 			queryset = queryset.filter(content__icontains=self.request.query_params.get('content'))
 		if self.request.query_params.get('order') == '1':
 			queryset = queryset.order_by('-datetime')
 		return queryset
-
-
 
 class post(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Post.objects.all()
