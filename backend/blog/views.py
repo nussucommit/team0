@@ -27,9 +27,23 @@ class post(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Post.objects.all()
 	serializer_class = PostSerializer
 
-class comment(generics.RetrieveUpdateDestroyAPIView):
-	queryset = Comment.objects.all()
+	def dispatch(self, request, *args, **kwargs):
+		self.id = kwargs.get('id', 'default')
+		return super(post, self).dispatch(request, *args, **kwargs)
+
+class postcomments(generics.ListAPIView):
 	serializer_class = CommentSerializer
+	lookup_field = 'post'
+
+	def get_queryset(self, *args, **kwargs):
+		return Comment.objects.filter(post=self.kwargs['post'])
+
+class comment(generics.RetrieveUpdateDestroyAPIView):
+	serializer_class = CommentSerializer
+
+	def dispatch(self, request, *args, **kwargs):
+		self.id = kwargs.get('id', 'default')
+		return super(comment, self).dispatch(request, *args, **kwargs)
 
 
 '''
