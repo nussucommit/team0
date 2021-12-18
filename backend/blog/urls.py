@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 urlpatterns = [
@@ -6,6 +6,10 @@ urlpatterns = [
     path('post/<int:pk>', views.post.as_view(), name='post'),
     path('post/comments/<int:post>', views.postcomments.as_view(), name='show_comments'),
     path('comment/<int:pk>', views.comment.as_view(), name='comment'),
+    
+    #Authorization
+    path('auth/' , include('djoser.urls')), 
+    path('auth/' , include('djoser.urls.authtoken')),
 ]
 
 '''
