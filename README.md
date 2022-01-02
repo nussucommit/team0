@@ -52,3 +52,20 @@ Responses are formatted as JSON objects.
 | DELETE | Deletes an existing comment | id                             |
 
 - `id` is passed via the URL
+### `auth/users/`
+- User Sign-up (Addition to database)
+| METHOD  |            ACTION                 |          PARAMETERS              |
+|---------|-----------------------------------|----------------------------------|
+| POST    | Adds the username and password    | username , password , re_password|
+
+### `auth/token/login/`
+- Creates a token for the user  
+| METHOD  |            ACTION                 |          PARAMETERS              |
+|---------|-----------------------------------|----------------------------------|
+| POST    |  Sends username for authentication| username , password.             |
+
+### `auth/token/logout/`
+- User logs out 
+| METHOD  |            ACTION                 |          PARAMETERS              |
+|---------|-----------------------------------|----------------------------------|
+| POST    | Sends username and password       | username , password.             |
