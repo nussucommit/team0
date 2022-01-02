@@ -54,9 +54,9 @@ Responses are formatted as JSON objects.
 - `id` is passed via the URL
 ### `auth/users/`
 - User Sign-up (Addition to database)
-| METHOD  |            ACTION                 |          PARAMETERS              |
-|---------|-----------------------------------|----------------------------------|
-| POST    | Adds the username and password    | username , password , re_password|
+|  METHOD   |            ACTION                   |          PARAMETERS                |
+| --------- | ----------------------------------- | ---------------------------------- |
+|  POST     | Adds the username and password      | username , password , re_password  |
 
 ### `auth/token/login/`
 - Creates a token for the user  
