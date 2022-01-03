@@ -12,6 +12,7 @@ const Navbar = () => {
                     backgroundColor: '#f1356d',
                     borderRadius: '8px',
                 }}>New Blog</Link> {/** first curly brace means dynamic value, inner one for js obeject */}
+                <Link to='/login'>Log out</Link>
             </div>
         </nav>
     );
