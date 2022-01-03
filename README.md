@@ -42,3 +42,24 @@ Available on [LucidChart](https://lucid.app/lucidchart/1e724cd3-96a3-4ccb-8882-8
 ### Find Post
 - `GET` call from `Post` table to display title, userid, datetime via `/results?c=content&u=userid`
 - Sort as a function in javascript. 
+
+### `auth/users/`
+- User Sign-up (Addition to database)
+
+|  METHOD   |            ACTION                   |          PARAMETERS                |
+| --------- | ----------------------------------- | ---------------------------------- |
+|  POST     | Adds the username and password      | username , password , re_password  |
+
+### `auth/token/login/`
+- Creates a token for the user
+  
+| METHOD  |            ACTION                 |          PARAMETERS              |
+|---------|-----------------------------------|----------------------------------|
+| POST    |  Sends username for authentication| username , password.             |
+
+### `auth/token/logout/`
+- User logs out 
+
+| METHOD  |            ACTION                 |          PARAMETERS              |
+|---------|-----------------------------------|----------------------------------|
+| POST    | Sends username and password       | username , password.             |
