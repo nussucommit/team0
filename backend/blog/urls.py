@@ -1,8 +1,19 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 from rest_framework_simplejwt import views as jwt_views
 
 urlpatterns = [
+    path('results', views.results.as_view(), name='show_posts'),
+    path('post/<int:pk>', views.post.as_view(), name='post'),
+    path('post/comments/<int:post>', views.postcomments.as_view(), name='show_comments'),
+    path('comment/<int:pk>', views.comment.as_view(), name='comment'),
+    
+    #Authorization
+    path('auth/' , include('djoser.urls')), 
+    path('auth/' , include('djoser.urls.authtoken')),
+]
+
+'''
     path('', views.home, name="home"),
     path('sign-up', views.register, name="sign-up"),
     path('results', views.results, name="results"),
@@ -12,3 +23,4 @@ urlpatterns = [
     path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
 ]
+'''
