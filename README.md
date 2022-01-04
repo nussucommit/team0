@@ -63,7 +63,7 @@ Responses are formatted as JSON objects.
 NOTE: If Authetication by simple jwt , use their documentation at https://djoser.readthedocs.io/en/latest/jwt_endpoints.html
 
 In the Format :
-auth/<url in documentation>
+'auth/<JWT URL>'
 
 
 ### `auth/users/`
