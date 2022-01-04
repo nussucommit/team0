@@ -2,7 +2,7 @@ from rest_framework import serializers
 from djoser.serializers import UserCreateSerializer
 from .models import Post, User, Comment
  
- class CustomUserCreateSerializers(UserCreateSerializer):
+class CustomUserCreateSerializers(UserCreateSerializer):
     class Meta(UserCreateSerializer.Meta):
         model = User
 
