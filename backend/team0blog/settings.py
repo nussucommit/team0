@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    #Third-Party Apps
+    'rest_framework',
+    'rest_framework.authtoken',
 
     #my apps
     'blog',
@@ -87,6 +91,28 @@ DATABASES = {
     }
 }
 
+#RestFrameWork Configuration
+REST_FRAMEWORK  = {
+    'DEFAULT_AUTHETICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication' ,
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSIONS_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}
+#DJOSER Configuration
+DJOSER = {
+    
+    'SERIALIZERS': {
+        'user': 'blog.serializers.UserCreateSerializer',
+        'user_create':'blog.serializers.UserCreateSerializer',
+        
+    },
+    'USER_CREATE_PASSWORD_RETYPE' : True, 
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -134,3 +160,4 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
 }
+
