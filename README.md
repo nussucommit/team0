@@ -62,6 +62,9 @@ Responses are formatted as JSON objects.
 
 NOTE: If Authetication by simple jwt , use their documentation at https://django-rest-framework-simplejwt.readthedocs.io/en/latest/rest_framework_simplejwt.html
 
+In the Format :
+**auth/<simpleJWT endpoint>**
+
 
 ### `auth/users/`
 - User Sign-up (Addition to database)
