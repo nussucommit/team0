@@ -60,10 +60,10 @@ Responses are formatted as JSON objects.
 
 ## Authentication ( By Djoser Token Based)
 
-NOTE: If Authetication by simple jwt , use their documentation at https://django-rest-framework-simplejwt.readthedocs.io/en/latest/rest_framework_simplejwt.html
+NOTE: If Authetication by simple jwt , use their documentation at https://djoser.readthedocs.io/en/latest/jwt_endpoints.html
 
 In the Format :
-auth/...simpleJWT Endpoint
+auth/<url in documentation>
 
 
 ### `auth/users/`
