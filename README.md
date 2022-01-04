@@ -70,7 +70,7 @@ In the Format : "auth/< JWT URL >"
 
 |  METHOD   |            ACTION                   |          PARAMETERS                |
 | --------- | ----------------------------------- | ---------------------------------- |
-|  POST     | Adds the username and password      | username , password , re_password  |
+|  POST     | Adds the username and password      | username , password                |
 
 ### `auth/token/login/`
 - Creates a token for the user
