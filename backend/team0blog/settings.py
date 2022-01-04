@@ -94,6 +94,7 @@ DATABASES = {
 #RestFrameWork Configuration
 REST_FRAMEWORK  = {
     'DEFAULT_AUTHETICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.BasicAuthentication' ,
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
@@ -110,9 +111,12 @@ DJOSER = {
         'user_create':'blog.serializers.UserCreateSerializer',
         
     },
-    'USER_CREATE_PASSWORD_RETYPE' : True, 
 }
-
+# JWT Configurations
+SIMPLE_JWT = {
+   'AUTH_HEADER_TYPES': ('JWT',),
+   'USER_ID_FIELD': 'username'
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
