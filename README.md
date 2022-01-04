@@ -58,6 +58,11 @@ Responses are formatted as JSON objects.
 - `GET` call from `Post` table to display title, userid, datetime via `/results?c=content&u=userid`
 - Sort as a function in javascript. 
 
+## Authentication ( By Djoser Token Based)
+
+NOTE: If Authetication by simple jwt , use their documentation at https://django-rest-framework-simplejwt.readthedocs.io/en/latest/rest_framework_simplejwt.html
+
+
 ### `auth/users/`
 - User Sign-up (Addition to database)
 
