@@ -54,13 +54,13 @@ const Login = ({ login }) => {
         </div>
         <hr />
         <div>
-          <button
+          <Link
             onClick={() => {
               history.push("/SignUp");
             }}
           >
             Sign Up
-          </button>
+          </Link>
         </div>
       </div>
     </>

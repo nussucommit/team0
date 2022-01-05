@@ -1,62 +1,64 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import api from "./api";
+import { Link } from "react-router-dom";
 
 const Create = () => {
-    const [title, setTitle] = useState('');
-    const [body, setBody] = useState('');
-    const [author, setAuthor] = useState('mario');
-    const [isPending, setIsPending] = useState(false);
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+  const [isPending, setIsPending] = useState(false);
 
-    const history = useHistory();
+  const history = useHistory();
+  const username64 = localStorage.getItem("token");
+  const username = atob(username64).split(":").at(0);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const blog = { title, body, author };
+  return (
+    <div className="create">
+      <h2>Add a New Blog</h2>
+      <form>
+        <label>Blog title:</label>
+        <input
+          type="text"
+          required
+          value={title}
+          onChange={(e) =>
+            setTitle(e.target.value)
+          } /* change the value of title every time smth is typed */
+        />
+        <label>Blog body:</label>
+        <textarea
+          required
+          value={body}
+          onChange={(e) => setBody(e.target.value)}
+        ></textarea>
+        {!isPending && (
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              // id, user, title, content
+              api.post(
+                `/post/create`,
+                {
+                  user: username,
+                  title: title,
+                  content: body,
+                },
+                {
+                  headers: {
+                    Authorization: `Basic ${localStorage.getItem("token")}`,
+                  },
+                }
+              );
+              history.push("/");
+            }}
+          >
+            Add Blog
+          </button>
+        )}
+        {isPending && <button disabled>Adding blog...</button>}
+      </form>
+    </div>
+  );
+};
 
-        setIsPending(true);
-        
-        fetch('http://localhost:8000/blogs', {
-            method: 'POST',
-            headers: { "Content-Type": "application/json"},
-            body: JSON.stringify(blog) /* add new blog to the json server */
-        }).then(() => {
-            setIsPending(false);
-            // history.go(-1);
-            history.push('/');
-        })
-
-    }
-
-    return ( 
-        <div className="create">
-            <h2>Add a New Blog</h2>
-            <form onSubmit={handleSubmit}>
-                <label>Blog title:</label>
-                <input
-                    type="text"
-                    required
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)} /* change the value of title every time smth is typed */
-                />
-                <label>Blog body:</label>
-                <textarea 
-                    required
-                    value={body}
-                    onChange={(e) => setBody(e.target.value)}
-                ></textarea>
-                <label>Blog author:</label>
-                <select
-                    value={author}
-                    onChange={ (e) => setAuthor(e.target.value)}
-                >
-                    <option value="mario">mario</option>
-                    <option value="yoshi">yoshi</option>
-                </select>
-                { !isPending && <button>Add Blog</button> }
-                { isPending && <button disabled>Adding blog...</button> }
-            </form>
-        </div>
-     );
-}
- 
 export default Create;

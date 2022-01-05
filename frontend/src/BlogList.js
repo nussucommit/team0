@@ -13,7 +13,7 @@ const BlogList = ({ title }) => {
         },
       })
       .then((res) => {
-        if (res.Status == 200) {
+        if (res.status == 200) {
           console.log(res.data);
           setBlogs(res.data);
         } else {
@@ -29,17 +29,18 @@ const BlogList = ({ title }) => {
   return (
     <div className="blog-list">
       <h2>{title}</h2>
-      {blogs &&
-        blogs.map((blog) => (
-          <div className="blog-preview" key={blog.id}>
-            <Link to={`/blogs/${blog.id}`}>
-              {" "}
-              {/* template string can output the variable inside it */}
-              <h2>{blog.title}</h2>
-              <p>Written by {blog.author}</p>
-            </Link>
-          </div>
-        ))}
+      {blogs
+        ? blogs.map((blog) => (
+            <div className="blog-preview" key={blog.id}>
+              <Link to={`/blogs/${blog.id}`}>
+                {" "}
+                {/* template string can output the variable inside it */}
+                <h2>{blog.title}</h2>
+                <p>Written by {blog.user}</p>
+              </Link>
+            </div>
+          ))
+        : false}
     </div>
   );
 };
