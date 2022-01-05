@@ -11,6 +11,7 @@ urlpatterns = [
     #Authorization
     path('auth/' , include('djoser.urls')), 
     path('auth/' , include('djoser.urls.authtoken')),
+    path('auth/', include('djoser.urls.jwt')),
 ]
 
 '''

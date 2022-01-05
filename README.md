@@ -58,12 +58,19 @@ Responses are formatted as JSON objects.
 - `GET` call from `Post` table to display title, userid, datetime via `/results?c=content&u=userid`
 - Sort as a function in javascript. 
 
+## Authentication ( By Djoser Token Based)
+
+NOTE: If Authetication by simple jwt , use their documentation at https://djoser.readthedocs.io/en/latest/jwt_endpoints.html
+
+In the Format : "auth/< JWT URL >"
+
+
 ### `auth/users/`
 - User Sign-up (Addition to database)
 
 |  METHOD   |            ACTION                   |          PARAMETERS                |
 | --------- | ----------------------------------- | ---------------------------------- |
-|  POST     | Adds the username and password      | username , password , re_password  |
+|  POST     | Adds the username and password      | username , password                |
 
 ### `auth/token/login/`
 - Creates a token for the user
