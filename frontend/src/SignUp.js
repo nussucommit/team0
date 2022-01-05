@@ -6,13 +6,14 @@ import { useHistory } from "react-router-dom";
 const Login = ({ login }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [re_password, setre_Password] = useState("");
   const history = useHistory();
 
   return (
     <>
       <div className="home"></div>
       <div className="Login">
-        <h1>Login</h1>
+        <h1>Sign Up</h1>
         <div>
           <input
             type="text"
@@ -24,37 +25,25 @@ const Login = ({ login }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <input
+            type="password"
+            value={re_password}
+            onChange={(e) => setre_Password(e.target.value)}
+          />
           <button
             onClick={() => {
               api
-                .post("/auth/token/login", {
+                .post("auth/users/", {
                   username: username,
                   password: password,
+                  re_password: re_password,
                 })
                 .then((res) => {
-                  console.log(res.data);
-                  console.log(res.status);
-                  if (res.status == 200) {
-                    const basicString = `${username}:${password}`;
-                    const basicBase64 = btoa(basicString);
-                    localStorage.setItem("token", basicBase64);
-
-                    login();
-                    history.push("/");
-                  }
+                  history.push("/login");
                 })
                 .catch((err) => {
-                  alert("Wrong Username or Password");
+                  alert(err);
                 });
-            }}
-          >
-            Login
-          </button>
-        </div>
-        <div>
-          <button
-            onClick={() => {
-              history.push("/SignUp");
             }}
           >
             Sign Up

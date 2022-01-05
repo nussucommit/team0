@@ -3,6 +3,7 @@ import Home from "./Home";
 import Create from "./Create";
 import NotFound from "./NotFound";
 import Login from "./Login";
+import SignUp from "./SignUp";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import BlogDetails from "./BlogDetails";
 import Comment from "./Comment";
@@ -45,6 +46,9 @@ function App() {
             </Route>
             <Route path="/login">
               <Login login={login} />
+            </Route>
+            <Route path="/signup">
+              <SignUp />
             </Route>
             <Route path="*">
               <NotFound />
