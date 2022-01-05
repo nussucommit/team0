@@ -5,7 +5,7 @@ from .models import Post, User, Comment
 
 class results(generics.ListAPIView):
 	serializer_class = PostSerializer
-	permission_classes = IsAuthenticated
+	permission_classes = [IsAuthenticated]
 	def get_queryset(self, *args, **kwargs):
 		queryset = Post.objects.all()
 		if self.request.query_params.get('username'):
@@ -19,12 +19,12 @@ class results(generics.ListAPIView):
 		return queryset
 
 class post(generics.RetrieveUpdateDestroyAPIView):
-	permission_classes = IsAuthenticated
+	permission_classes = [IsAuthenticated]
 	queryset = Post.objects.all()
 	serializer_class = PostSerializer
 
 class postcomments(generics.ListAPIView):
-	permission_classes = IsAuthenticated
+	permission_classes = [IsAuthenticated]
 	serializer_class = CommentSerializer
 
 	#use custom queryset instead of custom lookup_field to maintain same serializer with commentView
@@ -32,7 +32,7 @@ class postcomments(generics.ListAPIView):
 		return Comment.objects.filter(post=self.kwargs['post'])
 
 class comment(generics.RetrieveUpdateDestroyAPIView):
-	permission_classes = IsAuthenticated
+	permission_classes = [IsAuthenticated]
 	serializer_class = CommentSerializer
 	queryset = Comment.objects.all()
 
