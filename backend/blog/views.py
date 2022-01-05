@@ -21,10 +21,12 @@ class results(generics.ListAPIView):
 class cr_post(generics.CreateAPIView):
 	permission_classes = [IsAuthenticated]
 	serializer_class = PostSerializer
+	queryset = Post.objects.all()
 
 class cr_comments(generics.CreateAPIView):
 	permission_classes = [IsAuthenticated]
 	serializer_class = CommentSerializer
+	queryset = Comment.objects.all()
 
 class post(generics.RetrieveUpdateDestroyAPIView):
 	permission_classes = [IsAuthenticated]
