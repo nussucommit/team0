@@ -1,6 +1,6 @@
 from django.urls import path, include
 from . import views
-from rest_framework_simplejwt import views as jwt_views
+#from rest_framework_simplejwt import views as jwt_views
 
 urlpatterns = [
     path('results', views.results.as_view(), name='show_posts'),
