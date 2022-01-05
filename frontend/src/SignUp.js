@@ -11,24 +11,30 @@ const Login = ({ login }) => {
 
   return (
     <>
-      <div className="home"></div>
-      <div className="Login">
+      {/* <div className="home"></div> */}
+      <div className="signup">
         <h1>Sign Up</h1>
         <div>
+          <label>Enter Username</label>
           <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            required
           />
+          <label>Enter Password</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
+          <label>Confirm Password</label>
           <input
             type="password"
             value={re_password}
             onChange={(e) => setre_Password(e.target.value)}
+            required
           />
           <button
             onClick={() => {

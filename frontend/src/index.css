@@ -6,6 +6,7 @@
   font-family: "Quicksand";
   color: #333;
 }
+
 .navbar {
   padding: 20px;
   display: flex;
@@ -28,6 +29,8 @@
 .navbar a:hover {
   color: #f1356d;
 }
+
+
 .content {
   max-width: 600px;
   margin: 40px auto;
@@ -119,6 +122,72 @@
 }
 .comment button{
   margin: 10px 0;
+  background-color: #f1356d;
+  color:#fff;
+  border: 0;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* sign up */
+.signup{
+  text-align: center;
+}
+.signup h1{
+  margin-bottom: 50px;
+}
+.signup label{
+  margin: 5px 0;
+  display: block;
+  margin-top: 30px;
+}
+
+.signup input{
+  width: 35%;
+  height: 35px;
+  border-style: solid;
+  border-radius: 9px;
+  border-width: 1px;
+  display: block;
+  margin: 15px auto;
+}
+.signup button{
+  display: block;
+  text-align: center;
+  margin: 30px auto;
+  background-color: #f1356d;
+  color:#fff;
+  border: 0;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* login */
+
+.login{
+  text-align: center;
+}
+
+.login h1{
+  display: block;
+}
+
+.login input{
+  display: block;
+  margin: 30px auto;
+  width: 35%;
+  height: 35px;
+  border-style: solid;
+  border-radius: 9px;
+  border-width: 1px;
+}
+
+.login button{
+  display: block;
+  text-align: center;
+  margin: 30px auto;
   background-color: #f1356d;
   color:#fff;
   border: 0;

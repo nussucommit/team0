@@ -16,7 +16,7 @@ const UserList = ({ blogs, title }) => {
         },
       })
       .then((res) => {
-        if (res.status == 200) {
+        if (res.status === 200) {
           console.log(res.data);
           setUsers(res.data);
         } else {
