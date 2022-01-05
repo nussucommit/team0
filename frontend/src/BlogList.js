@@ -1,22 +1,47 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import api from "./api";
 
-const BlogList = ({ blogs, title }) => {
-     //const blogs = props.blogs;
-     //const title = props.title;
+const BlogList = ({ title }) => {
+  const [blogs, setBlogs] = useState("");
 
-    return ( 
-        <div className="blog-list">
-            <h2>{ title }</h2>
-            { blogs.map((blog) => (
-                <div className="blog-preview" key={blog.id}>
-                    <Link to={ `/blogs/${blog.id}`}> {/* template string can output the variable inside it */}
-                        <h2>{ blog.title }</h2>
-                        <p>Written by { blog.author }</p>
-                    </Link> 
-                </div>
-            )) }
-        </div>
-     );
-}
- 
+  const getResults = () => {
+    api
+      .get("/results", {
+        headers: {
+          Authorization: `Basic ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        if (res.Status == 200) {
+          console.log(res.data);
+          setBlogs(res.data);
+        } else {
+          console.log("error");
+        }
+      });
+  };
+
+  useEffect(() => {
+    getResults();
+  }, []);
+
+  return (
+    <div className="blog-list">
+      <h2>{title}</h2>
+      {blogs &&
+        blogs.map((blog) => (
+          <div className="blog-preview" key={blog.id}>
+            <Link to={`/blogs/${blog.id}`}>
+              {" "}
+              {/* template string can output the variable inside it */}
+              <h2>{blog.title}</h2>
+              <p>Written by {blog.author}</p>
+            </Link>
+          </div>
+        ))}
+    </div>
+  );
+};
+
 export default BlogList;
