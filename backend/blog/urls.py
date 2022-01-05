@@ -4,8 +4,10 @@ from . import views
 
 urlpatterns = [
     path('results', views.results.as_view(), name='show_posts'),
+    path('post/create', views.cr_post.as_view(), name='create_post'),
     path('post/<int:pk>', views.post.as_view(), name='post'),
     path('post/comments/<int:post>', views.postcomments.as_view(), name='show_comments'),
+    path('comment/create', views.cr_comments.as_view(), name='create_post'),
     path('comment/<int:pk>', views.comment.as_view(), name='comment'),
     
     #Authorization

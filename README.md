@@ -10,7 +10,6 @@ Responses are formatted as JSON objects.
 ### `results`
 - Returns a list of ordered posts that match the query parameters
 - Returns all posts by default and a blank JSON object if no posts meet the query
-- Supported request methods:
 
 | METHOD | ACTION                | PARAMETERS               |
 |--------|-----------------------|--------------------------|
@@ -20,15 +19,22 @@ Responses are formatted as JSON objects.
 - `content` returns all posts which contain the query string
 - List is ordered chronically showing old posts first by default, pass `order=1` to reverse the order
 
-### `post/<integer:post_id>`
-- CRUD functionalities for a singular post
+### `post/create`
+- Creates a new post
 
-| METHOD | ACTION                   | PARAMETERS                      |
-|--------|--------------------------|---------------------------------|
-| GET    | Returns a single post    | id                              |
-| POST   | Creates a new post       | id, user, title, content        |
-| PUT    | Edits an existing post   | id, user, title, content, likes |
-| DELETE | Deletes an existing post | id                              |
+| METHOD | ACTION             | PARAMETERS           |
+|--------|--------------------|----------------------|
+| POST   | Creates a new post | user, title, content |
+
+### `post/<integer:post_id>`
+- RUD functionalities for a singular post
+
+| METHOD | ACTION                                   | PARAMETERS                      |
+|--------|------------------------------------------|---------------------------------|
+| GET    | Returns a single post                    | id                              |
+| PATCH  | Partially updates an existing post       | id, user, title, content, likes |
+| PUT    | Edits an existing post                   | id, user, title, content, likes |
+| DELETE | Deletes an existing post                 | id                              |
 
 - `id` is passed via the URL
 
@@ -41,15 +47,22 @@ Responses are formatted as JSON objects.
 
 - `post` is passed via the URL
 
-### `comment/<integer:comment_id>`
-- CRUD functionalities for a singular comment
+### `comment/create`
+- Create a new comment
 
-| METHOD | ACTION                      | PARAMETERS                     |
-|--------|-----------------------------|--------------------------------|
-| GET    | Returns a single comment    | id                             |
-| POST   | Creates a new comment       | id, user, post, content        |
-| PUT    | Edits an existing comment   | id, user, post, content, likes |
-| DELETE | Deletes an existing comment | id                             |
+| METHOD | ACTION                | PARAMETERS          |
+|--------|-----------------------|---------------------|
+| POST   | Creates a new comment | user, post, content |
+
+### `comment/<integer:comment_id>`
+- RUD functionalities for a singular comment
+
+| METHOD | ACTION                              | PARAMETERS                     |
+|--------|-------------------------------------|--------------------------------|
+| GET    | Returns a single comment            | id                             |
+| PATCH  | Partially edits an existing comment | id, user, post, content, likes |
+| PUT    | Edits an existing comment           | id, user, post, content, likes |
+| DELETE | Deletes an existing comment         | id                             |
 
 - `id` is passed via the URL
 
@@ -60,9 +73,9 @@ Responses are formatted as JSON objects.
 
 ## Authentication ( By Djoser Token Based)
 
-NOTE: If Authetication by simple jwt , use their documentation at https://djoser.readthedocs.io/en/latest/jwt_endpoints.html
+NOTE: If Authetication by simple jwt , use their [documentation](https://djoser.readthedocs.io/en/latest/jwt_endpoints.html)
 
-In the Format : "auth/< JWT URL >"
+In the Format : `auth/< JWT URL >`
 
 
 ### `auth/users/`

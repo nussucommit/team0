@@ -18,6 +18,14 @@ class results(generics.ListAPIView):
 			queryset = queryset.order_by('-datetime')
 		return queryset
 
+class cr_post(generics.CreateAPIView):
+	permission_classes = [IsAuthenticated]
+	serializer_class = PostSerializer
+
+class cr_comments(generics.CreateAPIView):
+	permission_classes = [IsAuthenticated]
+	serializer_class = CommentSerializer
+
 class post(generics.RetrieveUpdateDestroyAPIView):
 	permission_classes = [IsAuthenticated]
 	queryset = Post.objects.all()
