@@ -16,8 +16,8 @@
 
   "comments": [
     {
-        "body": "this is a comment for testing",
-        "author": "JC",
+        "cbody": "this is a comment for testing",
+        "cauthor": "JC",
         "blogTitle": "My First Blog"
     }
   ]

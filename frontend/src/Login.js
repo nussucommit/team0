@@ -53,7 +53,7 @@ const Login = ({ login }) => {
           </button>
         </div>
         <hr />
-        <div>
+        <div >
           <Link
             onClick={() => {
               history.push("/SignUp");

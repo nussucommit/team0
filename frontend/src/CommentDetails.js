@@ -30,8 +30,8 @@ const CommentDetails = () => {
         comment.map((e) => {
           return (
             <article>
-              <h2>{e.content}</h2>
-              <p>Written by {e.user}</p>
+              <h2>{e.user}</h2>
+              <p>{e.content}</p>
               <div></div>
             </article>
           );

@@ -1,5 +1,6 @@
 import { useHistory, useParams } from "react-router-dom";
 import useFetch from "./useFetch";
+import Like from "./Like";
 
 const BlogDetails = () => {
   const { id } = useParams();
@@ -30,7 +31,10 @@ const BlogDetails = () => {
           <h2>{blog.title}</h2>
           <p>Written by {blog.user}</p>
           <div>{blog.content}</div>
-          <button onClick={handleClick}>delete</button>
+          <div className="like-button">
+             <Like />
+             <button className="delete-button" onClick={handleClick}>delete</button>
+          </div>
         </article>
       )}
     </div>
